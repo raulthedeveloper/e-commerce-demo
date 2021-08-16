@@ -8,17 +8,18 @@
         <link rel="stylesheet" href="{{asset('css/app.css?v=1a040064279b')}}">
 
         <title>{{config('app.name','e-commerce')}}</title>
- 
+
     </head>
     <body class="bg-light">
         @include('inc/navbar')
+        @include('inc/messages')
         <div class="container">
 
-            
+
 
             @yield('content')
         </div>
-            
+
 
     </body>
 </html>

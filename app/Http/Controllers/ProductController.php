@@ -37,7 +37,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request, [
+            'name'=> 'required',
+            'price'=> 'required',
+            'description'=> 'required',
+            'small'=> 'required',
+            'medium'=> 'required',
+            'large'=> 'required',
+            'image'=> 'required'
+        ]);
+            $product = new Product;
+            $product-> name = $request->input('name');
+            $product-> image = $request->input('image');
+            $product-> price = $request->input('price');
+        $product-> description = $request->input('description');
+            $product-> small = $request->input('small');
+            $product-> medium = $request->input('medium');
+            $product-> large = $request->input('large');
+
+            $product->save();
+
+            return redirect('/product')->with('success','Product Added');
+
+
+//        return view('inc/messages');
     }
 
     /**
@@ -60,7 +83,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+//        Allow to edit products
+        $editPost = Product::find($product);
+        return view('products/edit')->with('product',$editPost);
     }
 
     /**
@@ -70,9 +95,29 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $this -> validate($request, [
+            'name'=> 'required',
+            'price'=> 'required',
+            'description'=> 'required',
+            'small'=> 'required',
+            'medium'=> 'required',
+            'large'=> 'required',
+            'image'=> 'required'
+        ]);
+        $product = Product::find($id);
+        $product-> name = $request->input('name');
+        $product-> image = $request->input('image');
+        $product-> price = $request->input('price');
+        $product-> description = $request->input('description');
+        $product-> small = $request->input('small');
+        $product-> medium = $request->input('medium');
+        $product-> large = $request->input('large');
+
+        $product->save();
+
+        return redirect('/product')->with('success','Product Updated');
     }
 
     /**
@@ -81,8 +126,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $post = Product::find($id);
+        $post->delete();
+
+        return redirect('/product')->with('success','Product Removed');
+
     }
 }
