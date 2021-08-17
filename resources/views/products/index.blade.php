@@ -18,7 +18,7 @@
             </div>
             <div class="card-footer">
                 <p class="text-center">${{$product->price}}</p>
-                <a href="/product/{{$product->id}}" class="btn btn-primary">Go somewhere</a>
+                <a href="/product/{{$product->id}}" class="btn btn-primary">See More</a>
             </div>
         </div>
     </div>
